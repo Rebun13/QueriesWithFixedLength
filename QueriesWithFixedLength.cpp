@@ -10,8 +10,6 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'solve' function below.
- *
  * The function is expected to return an INTEGER_ARRAY.
  * The function accepts following parameters:
  *  1. INTEGER_ARRAY arr
@@ -21,11 +19,14 @@ vector<string> split(const string &);
 vector<int> solve(vector<int> arr, vector<int> queries) {
     vector<int> response;
     for(int d : queries) {
-        vector<int> maxima;
+        int min = INT_MAX;
         for(long unsigned int i = 0; i < arr.size() - d + 1; i++) {
-            maxima.push_back(*max_element(arr.begin() + i, arr.begin() + i + d));
+            int x = *max_element(arr.begin() + i, arr.begin() + i + d);
+            if(x < min) {
+                min = x;
+            }
         }
-        response.push_back(*min_element(maxima.begin(), maxima.end()));
+        response.push_back(min);
     }
     return response;
 }
